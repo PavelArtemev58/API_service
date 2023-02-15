@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Open%20Server/OSPanel%205.4.2/domains/API_Service/app/Http/Requests/StoreCityRequest.php</file>
+            <file>file:/D:/Open%20Server/OSPanel%205.4.2/domains/API_Service/.env</file>
+            <file>file:/D:/Open%20Server/OSPanel%205.4.2/domains/API_Service/routes/api/V1/api.php</file>
+            <file>file:/D:/Open%20Server/OSPanel%205.4.2/domains/API_Service/app/Http/Controllers/CountryController.php</file>
+            <file>file:/D:/Open%20Server/OSPanel%205.4.2/domains/API_Service/app/Http/Requests/StoreCountryRequest.php</file>
+            <file>file:/D:/Open%20Server/OSPanel%205.4.2/domains/API_Service/app/Http/Controllers/CityController.php</file>
+            <file>file:/D:/Open%20Server/OSPanel%205.4.2/domains/API_Service/config/database.php</file>
+        </group>
+    </open-files>
+</project-private>
