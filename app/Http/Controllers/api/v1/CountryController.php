@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCountryRequest;
 use App\Models\Country;
+use App\Http\Resources\CountryResource;
+use App\Http\Resources\CountryCollection;
 
 class CountryController extends Controller
 {
@@ -16,7 +18,7 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $countries = Country::all();
+        $countries = CountryResource::collection(Country::all());
         
         return response ($countries, 200)
                 ->header('Content-Type', 'Application/Json');
@@ -31,10 +33,6 @@ class CountryController extends Controller
     public function store(StoreCountryRequest $request)
     {
         $validated = $request->validated();
-        
-        if(Country::whereName($validated['name'])->count()){
-            return response("Country $validated[name] already exists", 400);
-        }
         
         $country = new Country();
         $country->name = $validated['name'];
@@ -53,7 +51,7 @@ class CountryController extends Controller
      */
     public function show($id)
     {
-        $country = Country::find($id);
+        $country = new CountryResource(Country::findOrFail($id));
         
         return response($country, 200)
                 ->header('Content-Type', 'Application/Json');
@@ -68,7 +66,22 @@ class CountryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['bail', 'required', 'unique:countries']
+        ]);
+        
+        $country = Country::find($id);
+        
+        if(!$country){
+            return response ('Country not found', 404);
+        }
+        
+        $country->name = $validated['name'];
+        $country->save();
+        $country->refresh();
+        
+        return response($country, 200)
+                ->header('Content-Type', 'Application/Json');
     }
 
     /**

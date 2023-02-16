@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCityRequest;
 use App\Models\City;
 use App\Models\Country;
+use App\Http\Resources\CityResource;
 
 class CityController extends Controller
 {
@@ -17,7 +18,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::all();
+        $cities = CityResource::collection(City::all());
         
         return response ($cities, 200)
                 ->header('Content-Type', 'Application/Json');
@@ -50,7 +51,7 @@ class CityController extends Controller
      */
     public function show($id)
     {
-        $city = City::findOrFail($id);
+        $city = new CityResource(City::findOrFail($id));
         
         return response($city, 200)
                 ->header('Content-Type', 'Application/Json');
@@ -66,7 +67,7 @@ class CityController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => ['bail', 'required'],
+            'name' => ['bail', 'required', 'unique:cities'],
         ]);
         
         $city = City::find($id);

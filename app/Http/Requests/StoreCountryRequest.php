@@ -24,7 +24,7 @@ class StoreCountryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['bail', 'required', 'unicue:countries']
+            'name' => ['bail', 'required', 'unique:countries']
         ];
     }
 }
